@@ -1,0 +1,41 @@
+repositories:
+- name: istio
+  url: https://istio-release.storage.googleapis.com/charts
+- name: kruise
+  url: https://openkruise.github.io/charts/
+
+releases:
+- name: istio-base
+  namespace: istio-system
+  chart: istio/base
+  version: 1.24.0
+  createNamespace: true
+  set:
+  - name: defaultRevision
+    value: 1-24-0
+
+- name: istiod-1-23-3
+  namespace: istio-system
+  chart: istio/istiod
+  version: 1.23.3
+  set:
+  - name: revision
+    value: 1-23-3
+  - name: values.global.variant
+    value: distroless
+
+- name: istiod-1-24-0
+  namespace: istio-system
+  chart: istio/istiod
+  version: 1.24.0
+  set:
+  - name: revision
+    value: 1-24-0
+  - name: values.global.variant
+    value: distroless
+
+- name: kruise
+  namespace: kruise-system
+  createNamespace: false
+  chart: kruise/kruise
+  version: 1.7.1
